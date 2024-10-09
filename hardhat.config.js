@@ -2,6 +2,7 @@ require("@nomicfoundation/hardhat-toolbox")
 require("@chainlink/env-enc").config()
 require("@nomicfoundation/hardhat-verify")
 require("./tasks")
+require("hardhat-deploy")
 /** @type import('hardhat/config').HardhatUserConfig */
 
 const SEPOLIA_URL = process.env.SEPOLIA_URL
@@ -20,6 +21,14 @@ module.exports = {
     etherscan: {
         apiKey: {
             sepolia: ETHERSCAN_API_KEY,
+        },
+    },
+    namedAccounts: {
+        firstAccount: {
+            default: 0,
+        },
+        secondAccount: {
+            default: 1,
         },
     },
 }
