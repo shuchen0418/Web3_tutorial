@@ -16,5 +16,8 @@
     "dotenv": "^16.4.5",
     "hardhat": "^2.22.12",
     "hardhat-deploy": "^0.12.4"
+  },
+  "dependencies": {
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.12"
   }
 }
