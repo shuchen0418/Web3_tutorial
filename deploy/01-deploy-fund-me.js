@@ -3,6 +3,7 @@ const {
     devlopmentChains,
     networkConfig,
     LOCK_TIME,
+    CONFIRMATIONS,
 } = require("../helper-hardhat-config")
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
@@ -11,17 +12,21 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deploy } = deployments
 
     let datafeedAddr
+    let confirmations
     if (devlopmentChains.includes(network.name)) {
         const mockV3Aggregator = await deployments.get("MockV3Aggregator")
         datafeedAddr = mockV3Aggregator.address
+        confirmations = 0
     } else {
         datafeedAddr = networkConfig[network.config.chainId].ethUsdDataFeed
+        confirmations = CONFIRMATIONS
     }
 
     const fundMe = await deploy("FundMe", {
         from: firstAccount,
         args: [LOCK_TIME, datafeedAddr],
         log: true,
+        waitConfirmations: confirmations,
     })
 
     if (

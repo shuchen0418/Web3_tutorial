@@ -16,7 +16,6 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
             from: firstAccount,
             args: [DECIMAL, INITIAL_ANSWER],
             log: true,
-            waitConfirmations: CONFIRMATIONS,
         })
     } else {
         console.log(
